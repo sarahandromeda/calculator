@@ -1,0 +1,23 @@
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100vh;
+}
+
+#display {
+    grid-column: span 4;
+    grid-row: span 2;
+    border: solid 2px grey;
+}
+
+#equals {
+    grid-column: span 2;
+}
