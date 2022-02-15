@@ -1,4 +1,5 @@
 /* Global Elements */
+const operatorSymbols = ["+", "-", "x", "÷"]
 const displayCurrent = document.getElementById("current");
 const displayPrevious = document.getElementById("previous");
 
@@ -23,7 +24,7 @@ const factorial = (a) => {
     return a;
 };
 
-const operate = (num1, sign, ...nums) => {
+const operate = (num1, sign, num2) => {
     let result;
     switch (sign) {
         case "+":
@@ -32,7 +33,7 @@ const operate = (num1, sign, ...nums) => {
         case "-":
             result = subtract(num1, num2);
             break;
-        case "×":
+        case "x":
             result = multiply(num1, num2);
             break;
         case "÷":
@@ -61,16 +62,37 @@ const operate = (num1, sign, ...nums) => {
 }
 
 const solveEquation = (text) => {
-    let items = text.split(" ");
+    let items = text.split(" ").filter(i => i); // filter out empty items
     console.log(items);
+    if (items.length < 3) {
+        displayPrevious.textContent = `${items[0]} =`;
+        displayCurrent.textContent = items[0];
+        return;
+    }
     let result = operate(items[0], items[1], items[2]);
     displayPrevious.textContent = displayCurrent.textContent + " =";
-    displayCurrent.textContent = result;
+    displayCurrent.textContent = result % 1 ? result.toPrecision(4): result;
 }
 
 const updateDisplay = (clickEvent) => {
     let element = clickEvent.target;
-    if (element.classList.contains("number")) {
+    let stringItems = displayCurrent.textContent.split(" ").filter(i => i);
+    if (operatorSymbols.includes(stringItems[stringItems.length-1]) &&
+            operatorSymbols.includes(element.textContent)) {
+        return;
+    }
+    if (stringItems.length == 3 && element.classList.contains("operand")) {
+        solveEquation(displayCurrent.textContent);
+        return;
+    }
+    if (element.textContent == ".") {
+        let hasDecimal = stringItems[stringItems.length-1].includes(".");
+        if (hasDecimal == true) {
+            return;
+        } else {
+            displayCurrent.textContent += element.textContent;
+        }
+    } else if (element.classList.contains("number")) {
         displayCurrent.textContent += element.textContent;
     } else if (element.classList.contains("operand")) {
         displayCurrent.textContent += ` ${element.textContent} `;
@@ -80,18 +102,15 @@ const updateDisplay = (clickEvent) => {
         displayCurrent.textContent = "";
     } else if (element.id == "delete") {
         displayCurrent.textContent = displayCurrent
-                .textContent
-                .slice(0, displayCurrent.textContent.length - 2); 
+        .textContent
+        .slice(0, displayCurrent.textContent.length - 2); 
     } else if (element.id == "equals") {
         solveEquation(displayCurrent.textContent);
     }
 }
-
+ 
 /* Listener Function */
 const buttons = document.querySelectorAll("button");
 buttons.forEach( (button) => {
     button.addEventListener("click", updateDisplay);
 })
-
-
-
