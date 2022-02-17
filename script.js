@@ -3,9 +3,16 @@ const operatorSymbols = ["+", "-", "x", "÷"];
 const shortcutKeys = ["Backspace", "Shift", "Enter", "=", "a", "+", "s", "-", 
         "m", "*", "d", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const calculatorGrid = document.querySelector(".calculator-grid");
 const displayCurrent = document.getElementById("current");
 const displayPrevious = document.getElementById("previous");
 const shortcutsContainer = document.querySelector(".shortcuts-container");
+
+/* Mobile Layout Setting */
+if (window.innerWidth <= 810) {
+    calculatorGrid.style.width = `${window.innerWidth-10}px`;
+    calculatorGrid.style.height = `${window.innerHeight-10}px`;
+}
 
 /* Equation Functions */
 const add = (a,b) => a + b;

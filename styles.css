@@ -64,9 +64,16 @@ button:disabled {
 
 #equals {
     grid-column: span 2;
+    color: floralwhite;
+    background-color: #462078;
 }
 
-/* Hover tooltip styles */
+#delete, #clear, .operand {
+    color: floralwhite;
+    background-color: #462078;
+}
+
+/* Tooltip styles */
 .tooltip .tooltiptext {
     visibility: hidden;
     position: absolute;
@@ -82,18 +89,24 @@ button:disabled {
     box-shadow: -5px 5px 9px -2px #878787;
 }
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    transition-delay: 1s;
-}
-
-/* Shortcuts Styles */
+/* Shortcuts table Styles */
 .shortcuts-container {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
     font-family: 'Anonymous Pro', monospace;
+}
+
+/* Shortcuts tooltip and table only on desktop */
+@media (hover: hover) {
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        transition-delay: 1s;
+    }
+    .shortcuts-container {
+        display: flex;
+    }
 }
 
 #show-shortcuts {
@@ -127,7 +140,7 @@ button:disabled {
 }
 
 /* Mobile Layout */
-@media (max-width: 768px) {
+@media (max-width: 811px) {
     body {
         background-color: #D6BFF1;
     }
@@ -139,14 +152,17 @@ button:disabled {
         width: 100%;
         height: inherit;
         box-shadow: none;
-        grid-template-columns: repeat(4, auto);
-        grid-template-rows: 100px repeat(6, 100px);
+        grid-template-columns: repeat(4, 1fr);
         align-content: space-between;
+        position: relative;
+        z-index: 1;
+        box-sizing: border-box;
+        overflow: hidden;
     }
     #display {
         font-size: 40px;
     }
     .shortcuts-container {
-        opacity: 0;
+        display: none;
     }
 }
