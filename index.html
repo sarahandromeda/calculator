@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet"> 
     <title>In-Broswer Calculator</title>
 </head>
 <body>
@@ -15,25 +18,91 @@
                 <p id="previous"></p>
                 <p id="current"></p>
             </div>
-            <button id="delete">Del</button>
-            <button id="clear">Clr</button>
-            <button id="equals">=</button>
-            <button id="seven" class="number">7</button>
-            <button id="eight" class="number">8</button>
-            <button id="nine" class="number">9</button>
-            <button id="add" class="operand">+</button>
-            <button id="four" class="number">4</button>
-            <button id="five" class="number">5</button>
-            <button id="six" class="number">6</button>
-            <button id="subtract" class="operand">-</button>
-            <button id="one" class="number">1</button>
-            <button id="two" class="number">2</button>
-            <button id="three" class="number">3</button>
-            <button id="multiply" class="operand">x</button>
-            <button id="left-parenthesis" class="punctuation"></button>
-            <button id="zero" class="number">0</button>
-            <button id="decimal" class="punctuation">.</button>
-            <button id="divide" class="operand">÷</button>
+            <button id="delete" class="tooltip">
+                <p>Del</p>
+                <span class="tooltiptext">"Backspace"</span>
+            </button>
+            <button id="clear" class="tooltip">
+                <p>Clr</p>
+                <span class="tooltiptext">"Shift" + "Backspace"</span>
+            </button>
+            <button id="equals" class="tooltip">
+                <p>=</p>
+                <span class="tooltiptext">"Enter" or "="</span>
+            </button>
+            <button id="seven" class="number">
+                <p>7</p>
+            </button>
+            <button id="eight" class="number">
+                <p>8</p>
+            </button>
+            <button id="nine" class="number">
+                <p>9</p>
+            </button>
+            <button id="add" class="operand tooltip">
+                <p>+</p>
+                <span class="tooltiptext">"+" or "a"</span>
+            </button>
+            <button id="four" class="number">
+                <p>4</p>
+            </button>
+            <button id="five" class="number">
+                <p>5</p>
+            </button>
+            <button id="six" class="number">
+                <p>6</p>
+            </button>
+            <button id="subtract" class="operand tooltip">
+                <p>-</p>
+                <span class="tooltiptext">"-" or "s"</span>
+            </button>
+            <button id="one" class="number">
+                <p>1</p>
+            </button>
+            <button id="two" class="number">
+                <p>2</p>
+            </button>
+            <button id="three" class="number">
+                <p>3</p>
+            </button>
+            <button id="multiply" class="operand tooltip">
+                <p>x</p>
+                <span class="tooltiptext">"*" or "m"</span>
+            </button>
+            <button disabled="true"></button>
+            <button id="zero" class="number">
+                <p>0</p>
+            </button>
+            <button id="decimal" class="punctuation">
+                <p>.</p>
+            </button>
+            <button id="divide" class="operand tooltip">
+                <p>÷</p>
+                <span class="tooltiptext">"d"</span>
+            </button>
+        </div>
+        <div class="shortcuts-container">
+            <p id="show-shortcuts">Click to Show Shortcuts</p>
+            <div id="shortcuts-key" class="hide">
+                <p id="header">Button</p>
+                <p id="header">Key(s)</p>
+                <p>Delete</p>
+                <p>Backspace</p>
+                <p>Clear</p>
+                <p>Shift + Backspace</p>
+                <p>Solve</p>
+                <p>Enter or =</p>
+                <p>Add</p>
+                <p>+ or a</p>
+                <p>Subtract</p>
+                <p>- or s</p>
+                <p>Multiply</p>
+                <p>* or m</p>
+                <p>Divide</p>
+                <p>d</p>
+                <p>Number</p>
+                <p>Respective number key</p>
+            </div>
         </div>
     </div>
 </body>
