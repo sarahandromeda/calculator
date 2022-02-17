@@ -6,17 +6,28 @@ p {
 
 button {
     display: inline-block;
-    border: 1px solid #D6BFF1;
-    background-color: #975FDD;
+    background-color: #207872;
     border-radius: 5px;
     padding: 0px;
     margin: 0px;
-    font-family: 'Anonymous Pro', monospace;
-    font-size: 18px;
+    font: 20px "Roboto Mono", serif;
+    color: floralwhite;
+    border: 1px solid #207872;
+    box-shadow: #424242 1px 1px 2px 0.7px;
+}
+
+button:active {
+    background-color: #144d49;
+}
+
+#delete:active, #clear:active, .operand:active, #equals:active {
+    background-color: #311655;
 }
 
 button:disabled {
-    background-color: #D6BFF1;
+    background-color: #9AE3DE;
+    box-shadow: none;
+    border: none;
 }
 
 /* Calculator Styles */
@@ -34,11 +45,12 @@ button:disabled {
     grid-template-rows: 80px repeat(6, 1fr);
     height: 500px;
     width: 400px;
-    border: 10px solid #D6BFF1;
+    border: 10px solid #9AE3DE;
     grid-auto-rows: auto;
     border-radius: 10px;
     box-shadow: 3px 3px 7px 1px #a4a4a4;
-    background-color: #D6BFF1;
+    background-color: #9AE3DE;
+    gap: 6px;
 }
 
 #display {
@@ -49,11 +61,9 @@ button:disabled {
     align-items: flex-end;
     justify-content: space-between;
     padding: 20px;
-    font-size: 27px;
-    font-family: 'Anonymous Pro', monospace;
-    font-size: 18px;
-    border: solid 1px #d6bff1;
-    background-color: #F1E9FA;
+    font: 22px "Roboto Mono", monospace;
+    border: solid 1px #9AE3DE;
+    background-color: #F6FCFC;
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -66,11 +76,13 @@ button:disabled {
     grid-column: span 2;
     color: floralwhite;
     background-color: #462078;
+    border-color: #462078;
 }
 
 #delete, #clear, .operand {
     color: floralwhite;
     background-color: #462078;
+    border-color: #462078;
 }
 
 /* Tooltip styles */
@@ -78,7 +90,7 @@ button:disabled {
     visibility: hidden;
     position: absolute;
     z-index: 1;
-    color: white;
+    color: floralwhite;
     background-color: #808080;
     width: 100px;
     border-radius: 5px;
@@ -95,7 +107,7 @@ button:disabled {
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
-    font-family: 'Anonymous Pro', monospace;
+    font: 18px "Roboto Mono", serif;
 }
 
 /* Shortcuts tooltip and table only on desktop */
@@ -142,20 +154,25 @@ button:disabled {
 /* Mobile Layout */
 @media (max-width: 811px) {
     body {
-        background-color: #D6BFF1;
+        background-color: #9AE3DE;
     }
+
+    button {
+        box-shadow: none;
+    }
+
     .calculator-container {
         width: 100%;
         height: 100%;
     }
+
     .calculator-grid {
         width: 100%;
         height: inherit;
         box-shadow: none;
         grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 100px repeat(6, 1fr);
         align-content: space-between;
-        position: relative;
-        z-index: 1;
         box-sizing: border-box;
         overflow: hidden;
     }

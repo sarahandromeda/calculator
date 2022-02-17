@@ -1,5 +1,5 @@
 /* Global Elements */
-const operatorSymbols = ["+", "-", "x", "÷"];
+const operatorSymbols = ["+", "-", "\u00D7", "÷"];
 const shortcutKeys = ["Backspace", "Shift", "Enter", "=", "a", "+", "s", "-", 
         "m", "*", "d", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -9,7 +9,7 @@ const displayPrevious = document.getElementById("previous");
 const shortcutsContainer = document.querySelector(".shortcuts-container");
 
 /* Mobile Layout Setting */
-if (window.innerWidth <= 810) {
+if (window.innerWidth < 811) {
     calculatorGrid.style.width = `${window.innerWidth-10}px`;
     calculatorGrid.style.height = `${window.innerHeight-10}px`;
 }
@@ -45,7 +45,7 @@ const operate = (num1, sign, num2) => {
         case "-":
             result = subtract(num1, num2);
             break;
-        case "x":
+        case "\u00D7":
             result = multiply(num1, num2);
             break;
         case "÷":
@@ -110,9 +110,9 @@ const updateDisplay = (clickEvent) => {
         displayCurrent.textContent += elementValue;
     } else if (operatorSymbols.includes(elementValue)) {
         displayCurrent.textContent += ` ${elementValue} `;
-    } else if (element.id == "clear") {
+    } else if (elementValue == "C") {
         displayCurrent.textContent = "";
-    } else if (element.id == "delete") {
+    } else if (elementValue == "←") {
         displayCurrent.textContent = displayCurrent
         .textContent
         .slice(0, -1); 
