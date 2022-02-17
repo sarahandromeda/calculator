@@ -49,8 +49,13 @@ const operate = (num1, sign, num2) => {
             result = multiply(num1, num2);
             break;
         case "÷":
-            result = divide(num1, num2);
-            break;
+            if (num2 == 0) {
+                result = "Nice try...";
+                break;
+            } else {
+                result = divide(num1, num2);
+                break;
+            }
         case "** 2":
             result = squared(num1);
             break;
@@ -91,14 +96,24 @@ const updateDisplay = (clickEvent) => {
     let elementValue = element.localName == "p" ? element.textContent :
              element.firstElementChild.textContent;
     let stringItems = displayCurrent.textContent.split(" ").filter(i => i);
+
+    // Reset display after divide by zero on click
+    if (displayCurrent.textContent == "Nice try...") {
+        displayCurrent.textContent = "";
+    }
+
+    // Check if there is already an operator
     if (operatorSymbols.includes(stringItems[stringItems.length-1]) &&
             operatorSymbols.includes(elementValue)) {
         return;
     }
+    
+    // If one pair of numbers has been entered, always solve on next click
     if (stringItems.length == 3 && operatorSymbols.includes(elementValue)) {
         solveEquation(displayCurrent.textContent);
         return;
     }
+    
     if (elementValue == ".") {
         if (stringItems.length < 1) {
             displayCurrent.textContent += elementValue
