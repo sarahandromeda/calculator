@@ -10,7 +10,7 @@ button {
     border-radius: 5px;
     padding: 0px;
     margin: 0px;
-    font: 20px "Roboto Mono", serif;
+    font: 30px "Roboto Mono", serif;
     color: floralwhite;
     border: 1px solid #207872;
     box-shadow: #424242 1px 1px 2px 0.7px;
@@ -61,7 +61,7 @@ button:disabled {
     align-items: flex-end;
     justify-content: space-between;
     padding: 20px;
-    font: 22px "Roboto Mono", monospace;
+    font: 32px "Roboto Mono", monospace;
     border: solid 1px #9AE3DE;
     background-color: #F6FCFC;
     border-radius: 10px;
@@ -98,7 +98,8 @@ button:disabled {
     margin-top: -50px;
     padding: 10px 5px;
     box-sizing: border-box;
-    box-shadow: -5px 5px 9px -2px #878787;
+    box-shadow: -5px 5px 9px -2px rgb(24, 24, 24);
+    font-size: 14px;
 }
 
 /* Shortcuts table Styles */
@@ -114,7 +115,7 @@ button:disabled {
 @media (hover: hover) {
     .tooltip:hover .tooltiptext {
         visibility: visible;
-        transition-delay: 1s;
+        transition-delay: 1.5s;
     }
     .shortcuts-container {
         display: flex;
@@ -175,6 +176,8 @@ button:disabled {
         align-content: space-between;
         box-sizing: border-box;
         overflow: hidden;
+        gap: 2px;
+        position: relative;
     }
     #display {
         font-size: 40px;

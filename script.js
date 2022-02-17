@@ -100,11 +100,15 @@ const updateDisplay = (clickEvent) => {
         return;
     }
     if (elementValue == ".") {
-        let hasDecimal = stringItems[stringItems.length-1].includes(".");
-        if (hasDecimal == true) {
-            return;
+        if (stringItems.length < 1) {
+            displayCurrent.textContent += elementValue
         } else {
-            displayCurrent.textContent += elementValue;
+            let hasDecimal = stringItems[stringItems.length-1].includes(".");
+            if (hasDecimal == true) {
+                return;
+            } else {
+                displayCurrent.textContent += elementValue;
+            }
         }
     } else if (numberKeys.includes(elementValue)) {
         displayCurrent.textContent += elementValue;
