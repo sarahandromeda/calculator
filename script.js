@@ -132,27 +132,37 @@ const updateDisplay = (clickEvent) => {
         }
     } else if (elementValue == ".") {
         if (stringItems.length < 1) {
-            displayCurrent.textContent += elementValue
+            displayCurrent.textContent += elementValue;
+            return
         } else {
             let hasDecimal = lastItem.includes(".");
             if (hasDecimal == true) {
                 return;
             } else {
                 displayCurrent.textContent += elementValue;
+                return
             }
         }
     } else if (elementValue == "=") {
         solveEquation(displayCurrent.textContent);
     } else if (operatorSymbols.includes(elementValue)) {
-        displayCurrent.textContent += ` ${elementValue} `;
+        if (lastItem == ".") {
+            return;
+        } else {
+            displayCurrent.textContent += ` ${elementValue} `;
+            return
+        }
     } else if (elementValue == "C") {
         displayCurrent.textContent = "";
+        return
     } else if (elementValue == "←") {
         displayCurrent.textContent = displayCurrent
         .textContent
         .slice(0, -1); 
+        return;
     } else if (numberKeys.includes(elementValue)) {
         displayCurrent.textContent += elementValue;
+        return;
     }
 }
 
