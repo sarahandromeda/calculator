@@ -1,5 +1,5 @@
 /* Global Elements */
-const operatorSymbols = ["+", "-", "\u00D7", "÷"];
+const operatorSymbols = ["+", "-", "\u00D7", "÷", "="];
 const shortcutKeys = ["Backspace", "Shift", "Enter", "=", "a", "+", "s", "-", 
         "m", "*", "d", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -96,6 +96,7 @@ const updateDisplay = (clickEvent) => {
     let elementValue = element.localName == "p" ? element.textContent :
              element.firstElementChild.textContent;
     let stringItems = displayCurrent.textContent.split(" ").filter(i => i);
+    let lastItem = stringItems[stringItems.length-1];
 
     // Reset display after divide by zero on click
     if (displayCurrent.textContent == "Nice try...") {
@@ -103,7 +104,7 @@ const updateDisplay = (clickEvent) => {
     }
 
     // Check if there is already an operator
-    if (operatorSymbols.includes(stringItems[stringItems.length-1]) &&
+    if (operatorSymbols.includes(lastItem) && 
             operatorSymbols.includes(elementValue)) {
         return;
     }
@@ -114,19 +115,34 @@ const updateDisplay = (clickEvent) => {
         return;
     }
     
-    if (elementValue == ".") {
+    if (element.classList == "negative") {
+        // if there's no number in display[0] or diaply[2] print negative
+        if (stringItems.length < 1 || operatorSymbols.includes(lastItem)) {
+            displayCurrent.textContent += "-";
+            return;
+        } else if (+lastItem && +lastItem > 0) {
+            stringItems[stringItems.length-1] = `-${lastItem}`;
+            displayCurrent.textContent = stringItems.join(" ");
+            return;
+        } else if (+lastItem && +lastItem < 0) {
+        // if there is a number and its negative, change it to positive
+            stringItems[stringItems.length-1] = lastItem.slice(1);
+            displayCurrent.textContent = stringItems.join(" ");
+            return;
+        }
+    } else if (elementValue == ".") {
         if (stringItems.length < 1) {
             displayCurrent.textContent += elementValue
         } else {
-            let hasDecimal = stringItems[stringItems.length-1].includes(".");
+            let hasDecimal = lastItem.includes(".");
             if (hasDecimal == true) {
                 return;
             } else {
                 displayCurrent.textContent += elementValue;
             }
         }
-    } else if (numberKeys.includes(elementValue)) {
-        displayCurrent.textContent += elementValue;
+    } else if (elementValue == "=") {
+        solveEquation(displayCurrent.textContent);
     } else if (operatorSymbols.includes(elementValue)) {
         displayCurrent.textContent += ` ${elementValue} `;
     } else if (elementValue == "C") {
@@ -135,8 +151,8 @@ const updateDisplay = (clickEvent) => {
         displayCurrent.textContent = displayCurrent
         .textContent
         .slice(0, -1); 
-    } else if (elementValue == "=") {
-        solveEquation(displayCurrent.textContent);
+    } else if (numberKeys.includes(elementValue)) {
+        displayCurrent.textContent += elementValue;
     }
 }
 
