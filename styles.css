@@ -120,6 +120,14 @@ button:disabled {
     .shortcuts-container {
         display: flex;
     }
+    /* If window is shrunk vertically, put shortcuts on right */
+}
+
+@media (max-height: 730px) {
+    .calculator-container {
+        flex-direction: row;
+        gap: 10px;
+    }
 }
 
 #show-shortcuts {
