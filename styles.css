@@ -115,7 +115,7 @@ button:disabled {
 @media (hover: hover) {
     .tooltip:hover .tooltiptext {
         visibility: visible;
-        transition-delay: 1.5s;
+        transition-delay: 1s;
     }
     .shortcuts-container {
         display: flex;

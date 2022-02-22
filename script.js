@@ -1,7 +1,7 @@
 /* Global Elements */
 const operatorSymbols = ["+", "-", "\u00D7", "÷", "="];
-const shortcutKeys = ["Backspace", "Shift", "Enter", "=", "a", "+", "s", "-", 
-        "m", "*", "d", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const shortcutKeys = ["Backspace", "Shift", "Enter", "=", "a", "+", "s", "-",
+    "m", "*", "d", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const calculatorGrid = document.querySelector(".calculator-grid");
 const displayCurrent = document.getElementById("current");
@@ -10,20 +10,20 @@ const shortcutsContainer = document.querySelector(".shortcuts-container");
 
 /* Mobile Layout Setting */
 if (window.innerWidth < 811) {
-    calculatorGrid.style.width = `${window.innerWidth-10}px`;
-    calculatorGrid.style.height = `${window.innerHeight-10}px`;
+    calculatorGrid.style.width = `${window.innerWidth - 10}px`;
+    calculatorGrid.style.height = `${window.innerHeight - 10}px`;
 }
 
 /* Equation Functions */
-const add = (a,b) => a + b;
-const subtract = (a,b) => a - b;
-const multiply = (a,b) => a * b;
-const divide = (a,b) => a / b;
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
 const squared = (a) => a ** 2;
 const cubed = (a) => a ** 3;
-const exponent = (a,b) => a ** b;
-const squareRoot = (a) => a ** (1/2);
-const cubeRoot = (a) => a ** (1/3);
+const exponent = (a, b) => a ** b;
+const squareRoot = (a) => a ** (1 / 2);
+const cubeRoot = (a) => a ** (1 / 3);
 const factorial = (a) => {
     if (a < 0) return undefined;
     if (a == 0) return 1;
@@ -87,16 +87,16 @@ const solveEquation = (text) => {
     }
     let result = operate(items[0], items[1], items[2]);
     displayPrevious.textContent = displayCurrent.textContent + " =";
-    displayCurrent.textContent = result % 1 ? result.toPrecision(4): result;
+    displayCurrent.textContent = result % 1 ? result.toPrecision(4) : result;
 }
 
 /* Display Functions */
 const updateDisplay = (clickEvent) => {
     let element = clickEvent.target;
     let elementValue = element.localName == "p" ? element.textContent :
-             element.firstElementChild.textContent;
+        element.firstElementChild.textContent;
     let stringItems = displayCurrent.textContent.split(" ").filter(i => i);
-    let lastItem = stringItems[stringItems.length-1];
+    let lastItem = stringItems[stringItems.length - 1];
 
     // Reset display after divide by zero on click
     if (displayCurrent.textContent == "Nice try...") {
@@ -104,29 +104,29 @@ const updateDisplay = (clickEvent) => {
     }
 
     // Check if there is already an operator
-    if (operatorSymbols.includes(lastItem) && 
-            operatorSymbols.includes(elementValue)) {
+    if (operatorSymbols.includes(lastItem) &&
+        operatorSymbols.includes(elementValue)) {
         return;
     }
-    
+
     // If one pair of numbers has been entered, always solve on next click
     if (stringItems.length == 3 && operatorSymbols.includes(elementValue)) {
         solveEquation(displayCurrent.textContent);
         return;
     }
-    
+
     if (element.classList == "negative") {
         // if there's no number in display[0] or diaply[2] print negative
         if (stringItems.length < 1 || operatorSymbols.includes(lastItem)) {
             displayCurrent.textContent += "-";
             return;
         } else if (+lastItem && +lastItem > 0) {
-            stringItems[stringItems.length-1] = `-${lastItem}`;
+            stringItems[stringItems.length - 1] = `-${lastItem}`;
             displayCurrent.textContent = stringItems.join(" ");
             return;
         } else if (+lastItem && +lastItem < 0) {
-        // if there is a number and its negative, change it to positive
-            stringItems[stringItems.length-1] = lastItem.slice(1);
+            // if there is a number and its negative, change it to positive
+            stringItems[stringItems.length - 1] = lastItem.slice(1);
             displayCurrent.textContent = stringItems.join(" ");
             return;
         }
@@ -157,8 +157,8 @@ const updateDisplay = (clickEvent) => {
         return
     } else if (elementValue == "←") {
         displayCurrent.textContent = displayCurrent
-        .textContent
-        .slice(0, -1); 
+            .textContent
+            .slice(0, -1);
         return;
     } else if (numberKeys.includes(elementValue)) {
         displayCurrent.textContent += elementValue;
@@ -167,24 +167,22 @@ const updateDisplay = (clickEvent) => {
 }
 
 const toggleShortcutsView = () => {
-    let showShortcuts = document.getElementById("show-shortcuts");
     let shortcutsKey = document.getElementById("shortcuts-key");
-    showShortcuts.classList.toggle("hide");
     shortcutsKey.classList.toggle("hide");
 }
- 
+
 /* Listener Function */
 const buttons = document.querySelectorAll("button");
-buttons.forEach( (button) => {
+buttons.forEach((button) => {
     button.addEventListener("click", updateDisplay);
 })
 
 document.addEventListener("keyup", (keyEvent) => {
-    if (shortcutKeys.includes(keyEvent.key)) {keyEvent.preventDefault()};
+    if (shortcutKeys.includes(keyEvent.key)) { keyEvent.preventDefault() };
     if (keyEvent.key == "Delete") {
         document.getElementById("clear").click();
         return;
-    }else if (keyEvent.key == "Backspace") {
+    } else if (keyEvent.key == "Backspace") {
         document.getElementById("delete").click();
         return;
     } else if (keyEvent.key == "Enter" || keyEvent.key == "=") {
@@ -211,7 +209,7 @@ document.addEventListener("keyup", (keyEvent) => {
     } else if (keyEvent.key == "6") {
         document.getElementById("six").click();
         return;
-    } else if (keyEvent.key == "-"|| keyEvent.key == "s") {
+    } else if (keyEvent.key == "-" || keyEvent.key == "s") {
         document.getElementById("subtract").click();
         return;
     } else if (keyEvent.key == "1") {
@@ -229,34 +227,14 @@ document.addEventListener("keyup", (keyEvent) => {
     } else if (keyEvent.key == "0") {
         document.getElementById("zero").click();
         return;
-    }else if (keyEvent.key == ".") {
+    } else if (keyEvent.key == ".") {
         document.getElementById("decimal").click();
         return;
     } else if (keyEvent.key == "d") {
         document.getElementById("divide").click();
-        return; 
+        return;
     }
 })
 
 
 shortcutsContainer.addEventListener("click", toggleShortcutsView);
-
-
-
-
-/* 
-"Backspace", "Shift", "Enter", "7"
-
-, "8", "9", 
-case "+",
-case "4",
-case "5",
-case "6",
-case "-":
-case "1":
-case "2":
-case "3":
-case "*":
-case "0":
-case ".":
-*/
